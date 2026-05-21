@@ -10,47 +10,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %封面页
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\mytitle}{The title of the presentation is here}
-\newcommand{\myauthor}{Your Name}
-\newcommand{\myinstitute}{Nankai University}
-\newcommand{\mydate}{\today} 
+% 1. 定义封面内容
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mytitle}{图神经网络入门：\\ 从GNN基础到GCN与RGCN进阶} % \\ 表示强制换行
+\newcommand{\myinstitute}{Hebei University of Technology}
+\newcommand{\mydate}{June 15, 2025}
 
+% 2. 封面页布局
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \begin{tikzpicture}[remember picture, overlay]
-    % 1. 蓝色标题栏背景（保持 0.4 倍高度）
+    % --- 顶部蓝色背景栏 (高度占屏幕的 45%) ---
     \node[fill=midblue, inner sep=0pt, outer sep=0pt, 
           minimum width=\paperwidth, 
-          minimum height=0.4\paperheight, 
-          anchor=north] at ([yshift=+1pt]current page.north) {};
+          minimum height=0.45\paperheight, 
+          anchor=north] at ([yshift=1pt]current page.north) {};
     
-    % 2. 标题（保持在蓝色背景内居中）
+    % --- 标题文字 (白色, 加粗, 居中) ---
+    % yshift=-0.21\paperheight 确保文字在蓝色栏内垂直居中
     \node[text=white, 
-          font=\fontsize{32}{36}\selectfont\bfseries, 
+          font=\fontsize{26}{30}\selectfont\bfseries, 
           text width=0.9\paperwidth, 
           align=center] at ([yshift=-0.21\paperheight]current page.north) 
           {\mytitle};
-
-    % 3. 校徽：放在蓝色背景下面，名字上面
-    % 设置为水平居中，yshift 为正数表示在中心点上方。
-    % 如果觉得太靠上或太靠下，可以微调 0.5cm 这个数值
-    \node[anchor=center] at ([yshift=0.5cm]current page.center) {
-        \includegraphics[height=1.5cm]{image/校徽.png}
-    };
     
-    % 4. 作者信息（yshift=-1.8cm 表示在中心点下方 1.8cm）
+    % --- 机构信息 (黑色, 居中) ---
     \node[text=black, 
-          font=\Large] at ([yshift=-1.8cm]current page.center) 
-          {\myauthor};
-    
-    % 5. 机构信息
-    \node[text=black, 
-          font=\Large] at ([yshift=-2.7cm]current page.center) 
+          font=\Large] at ([yshift=-0.5cm]current page.center) 
           {\myinstitute};
-          
-    % 6. 日期
-    \node[text=gray, 
-          font=\large] at ([yshift=-3.6cm]current page.center) 
+    
+    % --- 日期 (黑色, 放在机构下方) ---
+    \node[text=black, 
+          font=\large] at ([yshift=-1.3cm]current page.center) 
           {\mydate};
+          
+% --- 校徽 (放在最底部中心，稍微往上提一点) ---
+    \node[anchor=center] at ([yshift=-3cm]current page.center) {
+        \includegraphics[height=2.2cm]{image/校徽.png}
+    };
   \end{tikzpicture}
 \end{frame}
 
