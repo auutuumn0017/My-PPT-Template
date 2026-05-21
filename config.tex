@@ -26,8 +26,8 @@
 \newcommand{\UseBlackFont}{\toggletrue{fontBlackTheme}}
 \newcommand{\UseSongFont} { \togglefalse{fontBlackTheme}}
 
-\UseSongFont   % ← 这里启用“宋体+Times New Roman”主题
-% 或者 \UseBlackFont ← 启用“黑体+Liberation Sans”主题
+%\UseSongFont   % ← 这里启用“宋体+Times New Roman”主题
+\UseBlackFont % ← 启用“黑体+Liberation Sans”主题
 
 %—— 根据开关选择字体 —— 
 \iftoggle{fontBlackTheme}{
@@ -166,16 +166,23 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 页脚设置
+% 页脚设置（已调整比例：左 0.4，中 0.5，右 0.1）
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setbeamertemplate{footline}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \node[fill=lightblue, minimum width=0.3\paperwidth, minimum height={0.4cm+1pt}, anchor=south west]
+    % 1. 左边色块：宽度调整为 0.4
+    \node[fill=lightblue, minimum width=0.4\paperwidth, minimum height={0.4cm+1pt}, anchor=south west]
          at ([xshift=-1pt,yshift=-1pt]current page.south west) (leftblock) {};
-    \node[fill=midblue, minimum width=0.6\paperwidth, minimum height={0.4cm+1pt}, anchor=south west]
-         at ([xshift=0.3\paperwidth-1pt,yshift=-1pt]current page.south west) (midblock) {};
+         
+    % 2. 中间色块：起点跟在 0.4 后面，自身宽度调整为 0.5
+    \node[fill=midblue, minimum width=0.5\paperwidth, minimum height={0.4cm+1pt}, anchor=south west]
+         at ([xshift=0.4\paperwidth-1pt,yshift=-1pt]current page.south west) (midblock) {};
+         
+    % 3. 右边色块：起点在 0.9 (0.4 + 0.5)，宽度保持 0.1
     \node[fill=darkblue, minimum width={0.1\paperwidth+1pt}, minimum height={0.4cm+1pt}, anchor=south west]
          at ([xshift=0.9\paperwidth-1pt,yshift=-1pt]current page.south west) (rightblock) {};
+         
+    % 以下是文字渲染部分，保持原样即可，会自动居中
     \node[anchor=center, yshift=0.5pt, font=\tiny, text=white] at (leftblock.center)
          {艾洋, https://auutuumn0017.github.io/};
     \node[anchor=center, yshift=0.5pt, font=\tiny, text=white] at (midblock.center)
