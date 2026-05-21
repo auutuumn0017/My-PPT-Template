@@ -13,31 +13,42 @@
 \newcommand{\mytitle}{The title of the presentation is here}
 \newcommand{\myauthor}{Your Name}
 \newcommand{\myinstitute}{Nankai University}
+\newcommand{\mydate}{\today} % 3. 在这里定义日期，\today 会自动显示当前日期，也可以写成 {2026年5月}
 
 \begin{frame}
   \begin{tikzpicture}[remember picture, overlay]
-    % 蓝色标题栏背景
+    % 2. 蓝色标题栏背景（将 minimum height 从 0.5 改为了 0.4，上下距离就缩短了）
     \node[fill=midblue, inner sep=0pt, outer sep=0pt, 
-      minimum width=\paperwidth, 
-      minimum height=0.5\paperheight, 
-      anchor=north] at ([yshift=+1pt]current page.north) {};
+          minimum width=\paperwidth, 
+          minimum height=0.4\paperheight, 
+          anchor=north] at ([yshift=+1pt]current page.north) {};
     
-    % 标题
+    % 1. 加上校徽（放置在蓝色画布的左上角，高设为 1.2cm，可根据需要调节）
+    \node[anchor=north west, xshift=0.5cm, yshift=-0.4cm] at (current page.north west) {
+        \includegraphics[height=1.2cm]{校徽.png}
+    };
+    
+    % 标题（因为蓝色背景变小了，所以将标题的 yshift 从 -0.265 调整到了 -0.21，使其依然居中在蓝色区域内）
     \node[text=white, 
           font=\fontsize{32}{36}\selectfont\bfseries, 
           text width=0.9\paperwidth, 
-          align=center] at ([yshift=-0.265\paperheight]current page.north) 
+          align=center] at ([yshift=-0.21\paperheight]current page.north) 
           {\mytitle};
     
-    % 作者信息
+    % 作者信息（向下微调了位置，避免跟变小的蓝色背景靠得太近）
     \node[text=black, 
-          font=\Large] at ([yshift=-1.5cm]current page.center) 
+          font=\Large] at ([yshift=-1.8cm]current page.center) 
           {\myauthor};
     
     % 机构信息
     \node[text=black, 
-          font=\Large] at ([yshift=-2.5cm]current page.center) 
+          font=\Large] at ([yshift=-2.7cm]current page.center) 
           {\myinstitute};
+          
+    % 3. 加上日期（放置在机构信息下方）
+    \node[text=gray, 
+          font=\large] at ([yshift=-3.6cm]current page.center) 
+          {\mydate};
   \end{tikzpicture}
 \end{frame}
 
